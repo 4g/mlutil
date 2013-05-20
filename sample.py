@@ -13,7 +13,9 @@ def main(argv):
     # create an instance of modeML model and use it to fit data and then predict results
     model = modeML.modeML()
     model.fit(training_data,training_labels)    
-    predicted_results = model.predict(test_data)
+    predicted_results = model.predict(test_data) # default method . will return a mode of results
+    
+    #predicted_results = model.predict(test_data , np.mean) # send a method alongwith data. Will return mean of results
     
     # show correct and predicted results
     for (i,j) in zip(correct_results,predicted_results):
