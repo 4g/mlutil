@@ -15,8 +15,7 @@ class modeML:
     # load all modules required as specified in config file
     def loadAll(self):        
         for family in config.classifiers:
-           self.lib[family] = __import__(family)   
-           self.lib[family] =  getattr(self.lib[family],family.split(".")[1])
+           self.lib[family] =  getattr(__import__(family),family.split(".")[1])
            for classifier in config.classifiers[family]:                    
                self.models[classifier] = getattr(self.lib[family],classifier)()  
 
@@ -31,7 +30,10 @@ class modeML:
         return self        
         
     # predict results from model and take mode to return most popular result
-    def predict(self,data,method=None):
+    def predict(self,data,method=None):        
+        if self.empty == True:
+            return []
+                        
         results = []
         for family in config.classifiers:
             for classifier in config.classifiers[family]:
