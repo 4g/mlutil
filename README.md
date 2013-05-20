@@ -11,5 +11,5 @@ Utilities for ML libraries in python
              will return statistical mode of all results [result which occurs most]
              OR
              model.predict(data,function) 
-             to combine results using your own function
+             to combine results using your own function 
     
