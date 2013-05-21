@@ -1,22 +1,25 @@
 import sys, getopt
-import config as config
+import config as conf
 import numpy as np
 
 class modeML:
     models = dict()    
     lib = dict()
+    empty = True
+    config = []
     
     # initialize empty dictionaries which will contain modules and models
-    def __init__(self):            
+    def __init__(self,config=None):
+        self.config = conf if config is None else config           
         self.models = dict()
         self.lib = dict()
         self.empty = True
     
     # load all modules required as specified in config file
     def loadAll(self):        
-        for family in config.classifiers:
+        for family in self.config.classifiers:
            self.lib[family] =  getattr(__import__(family),family.split(".")[1])
-           for classifier in config.classifiers[family]:                    
+           for classifier in self.config.classifiers[family]:                    
                self.models[classifier] = getattr(self.lib[family],classifier)()  
 
     # fit data into modules after initializing them if they are not yet created                           
@@ -24,8 +27,8 @@ class modeML:
         if self.empty:
             self.loadAll()                     
             self.empty = False                                             
-        for family in config.classifiers:
-            for classifier in config.classifiers[family]:   
+        for family in self.config.classifiers:
+            for classifier in self.config.classifiers[family]:   
                 self.models[classifier] = self.models[classifier].fit(data,label)
         return self        
         
@@ -35,8 +38,8 @@ class modeML:
             return []
                         
         results = []
-        for family in config.classifiers:
-            for classifier in config.classifiers[family]:
+        for family in self.config.classifiers:
+            for classifier in self.config.classifiers[family]:
                 results.append(self.models[classifier].predict(data))   
         results = np.array(results)
         

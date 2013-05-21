@@ -3,3 +3,7 @@ classifiers = {
                "sklearn.svm":{"SVC","NuSVC"},
                "sklearn.ensemble":{"RandomForestClassifier","ExtraTreesClassifier"}
                }
+               
+parameters = {
+             "svm": {}    
+             }               

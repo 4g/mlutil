@@ -1,17 +1,18 @@
 import modeML as modeML
 import sys
 import numpy as np
+import config
 
 #sample code for ModeML. 
 
 def main(argv):    
     # create sample data
-    num_train_samples = 50
+    num_train_samples = 500
     num_test_samples = 10    
     training_data , training_labels , test_data , correct_results = getSampleData(num_train_samples,num_test_samples)    
         
     # create an instance of modeML model and use it to fit data and then predict results
-    model = modeML.modeML()
+    model = modeML.modeML(config)
     model.fit(training_data,training_labels)    
     
     # default method . will return a mode of results
@@ -34,7 +35,7 @@ def main(argv):
         
 # the function our model is trying to learn        
 def function(x):
-    return 1 if x*x + 2*x > 251000 else 0
+    return 1 if 2*x + x*x > 251000 else 0
 
 # create data randomly
 def getData(length):
