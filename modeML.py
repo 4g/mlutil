@@ -1,3 +1,11 @@
+'''
+@author: apurvagup@gmail.com
+General purpose library for combining 
+Machine Learning Algorithms in python
+Released under GPL. Please cite this 
+license if you derive from this work
+'''
+
 import sys, getopt
 import config as conf
 import numpy as np
